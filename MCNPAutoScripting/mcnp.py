@@ -176,9 +176,10 @@ prdmp 1e8 1e8 -1 $ dump every hour
 Cut:n 1j 0.1 $ 100 keV Neutron Energy Cutoff
 phys:n 1j 14 $analog neutron transport
 phys:p
-nps 1e9
 """
         return _str
+
+
 
 class MCNP:
     def __init__(
@@ -186,8 +187,8 @@ class MCNP:
             title = "MCNP Simulation",
             cells=[], surfaces=[], 
             source=Source(), materials=[], 
-            tallies=[], misc_data=[MiscData()]
-            ):
+            tallies=[], misc_data=[MiscData()], nps="1e9", seed=None
+                ):
         self.title = title
         self.cells = cells
         self.surfaces = surfaces
@@ -195,7 +196,8 @@ class MCNP:
         self.materials = materials
         self.tallies = tallies
         self.misc_data = misc_data
-
+        self.nps = nps
+        self.seed = seed
     def string(self):
         _str = ''
         _str += f"c {self.title}\n"
@@ -222,7 +224,9 @@ class MCNP:
         _str +='c ***DATA***\n'
         for misc in self.misc_data:
             _str += misc.string()
-
+        _str += f"nps {self.nps}\n"
+        if self.seed:
+            _str += f"seed {self.seed}\n"
         if _str[-2:] == '\n':
             _str = _str[:-1]
         return _str
