@@ -225,6 +225,7 @@ class MCNP:
         for misc in self.misc_data:
             _str += misc.string()
         _str += f"nps {self.nps}\n"
+        # testing update
         if self.seed:
             _str += f"seed {self.seed}\n"
         if _str[-2:] == '\n':
