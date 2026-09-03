@@ -25,6 +25,7 @@ def fold128(text):
             # new_line = ''
             new_lines.append(new_line)
             new_line = ''
+            new_line += lines[i] + ' '
             i += 1
     new_lines.append(new_line)
     new_lines = [e for e in new_lines if e != '']
