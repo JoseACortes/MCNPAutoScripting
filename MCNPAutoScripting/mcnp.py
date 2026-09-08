@@ -126,7 +126,7 @@ class DetectorTally6:
         if self.soil_cells:
             _str += f"FT{self.tally_id} TAG {self.tag}\n"
             _fstr = f"FU{self.tally_id} "
-            _fstr += ' '.join(map(str, self.soil_cells))
+            _fstr += '00000 '.join(map(str, self.soil_cells))
             _str += fold128(_fstr)+'\n'
         return _str
     
