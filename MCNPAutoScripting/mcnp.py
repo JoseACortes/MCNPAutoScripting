@@ -102,13 +102,14 @@ class DetectorTally8:
         return _str
     
 class DetectorTally6:
-    def __init__(self, tally_id, detector_cells, soil_cells=None, energy_string=default_energy_string, importance_string=':n,p', label=None):
+    def __init__(self, tally_id, detector_cells, soil_cells=None, energy_string=default_energy_string, importance_string=':n,p', label=None, tag=4):
         self.tally_id = tally_id
         self.detector_cells = detector_cells
         self.soil_cells = soil_cells
         self.energy_string = energy_string
         self.importance_string = importance_string
         self.label = label
+        self.tag = tag
 
     def string(self):
         _str = ''
@@ -123,7 +124,7 @@ class DetectorTally6:
         _str += f")\n"
         _str += f"E{self.tally_id} {self.energy_string}\n"
         if self.soil_cells:
-            _str += f"FT{self.tally_id} TAG 4\n"
+            _str += f"FT{self.tally_id} TAG {self.tag}\n"
             _fstr = f"FU{self.tally_id} "
             _fstr += ' '.join(map(str, self.soil_cells))
             _str += fold128(_fstr)+'\n'
