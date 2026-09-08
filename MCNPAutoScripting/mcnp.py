@@ -123,6 +123,7 @@ class DetectorTally6:
         _str += f")\n"
         _str += f"E{self.tally_id} {self.energy_string}\n"
         if self.soil_cells:
+            _str += f"FT{self.tally_id} ICD\n"
             _fstr = f"FU{self.tally_id} "
             _fstr += ' '.join(map(str, self.soil_cells))
             _str += fold128(_fstr)+'\n'
