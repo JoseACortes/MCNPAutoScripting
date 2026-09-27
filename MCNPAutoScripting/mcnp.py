@@ -175,7 +175,6 @@ class MiscData:
     def string(self):
         _str = """mode n p
 prdmp 1e8 1e8 -1 $ dump every hour
-Cut:n 1j 0.1 $ 100 keV Neutron Energy Cutoff
 phys:n 1j 14 $analog neutron transport
 phys:p
 """
@@ -189,7 +188,9 @@ class MCNP:
             title = "MCNP Simulation",
             cells=[], surfaces=[], 
             source=Source(), materials=[], 
-            tallies=[], misc_data=[MiscData()], nps="1e9", seed=None
+            tallies=[], misc_data=[MiscData()], 
+            nps="1e9", seed=None, 
+            cutn="1j 0.1", cutp=None
                 ):
         self.title = title
         self.cells = cells
@@ -200,6 +201,8 @@ class MCNP:
         self.misc_data = misc_data
         self.nps = nps
         self.seed = seed
+        self.cutn = cutn
+        self.cutp = cutp
     def string(self):
         _str = ''
         _str += f"c {self.title}\n"
@@ -230,6 +233,10 @@ class MCNP:
         # testing update
         if self.seed:
             _str += f"seed {self.seed}\n"
+        if self.cutn:
+            _str += f"cut:n {self.cutn}\n"
+        if self.cutp:
+            _str += f"cut:p {self.cutp}\n"
         if _str[-2:] == '\n':
             _str = _str[:-1]
         return _str
