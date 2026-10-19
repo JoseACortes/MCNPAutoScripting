@@ -68,7 +68,9 @@ class DetectorTally8:
             phl=None,
             energy_string=default_energy_string, 
             importance_string=':n,p', 
-            label=None):
+            label=None,
+            soil_cells=None,
+            ):
         
         self.geb = geb
         self.phl = phl
@@ -77,6 +79,7 @@ class DetectorTally8:
         self.energy_string = energy_string
         self.importance_string = importance_string
         self.label = label
+        self.soil_cells = soil_cells
 
     def string(self):
         _str = ''
@@ -96,7 +99,13 @@ class DetectorTally8:
                 _str += f" GEB {self.geb[0]} {self.geb[1]} {self.geb[2]}"
             if self.phl:
                 _str += f" PHL {self.phl[0]} {self.phl[1]} {self.phl[2]} {self.phl[3]}"
+            if self.soil_cells:
+                _str += f" ICD"
             _str += '\n'
+        if self.soil_cells:
+            _fstr = f"FU{self.tally_id} "
+            _fstr += ' '.join(map(str, self.soil_cells))
+            _str += fold128(_fstr)+'\n'
 
 
         return _str
