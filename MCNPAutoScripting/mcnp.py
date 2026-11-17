@@ -173,8 +173,10 @@ class Source:
 
     def string(self):
         _str = f'sdef erg={self.energy_string} pos={self.position_string} dir={self.direction_string} vec={self.vector_string}\n'
-        _str += f'si1 {self.si_string}\n'
-        _str += f'sp1 {self.sp_string}\n'
+        if self.si_string is not None:
+            _str += f'si1 {self.si_string}\n'
+        if self.sp_string is not None:
+            _str += f'sp1 {self.sp_string}\n'
         return _str
 
 class MiscData:
